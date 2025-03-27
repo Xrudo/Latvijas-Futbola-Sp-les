@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spēļu vietu sadalījums</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-map-marked-alt"></i> Spēļu vietu sadalījums</h1>
+        
+        <div class="graph-container">
+            <img src="{{ url_for('static', filename='graphs/locations_pie.png') }}" 
+                 alt="Spēļu vietu sadalījums">
+        </div>
+        
+        <div class="action-buttons">
+            <a href="/" class="btn">
+                <i class="fas fa-arrow-left"></i> Atpakaļ uz galveno lapu
+            </a>
+        </div>
+    </div>
+</body>
+</html>

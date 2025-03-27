@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latvijas Futbola Spēles</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-futbol"></i> Latvijas Futbola Spēles</h1>
+        
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Kopā spēles</h3>
+                <p>{{ stats.total }}</p>
+            </div>
+            <div class="stat-box win">
+                <h3>Uzvaras</h3>
+                <p>{{ stats.wins }}</p>
+            </div>
+            <div class="stat-box draw">
+                <h3>Neizšķirti</h3>
+                <p>{{ stats.draws }}</p>
+            </div>
+            <div class="stat-box loss">
+                <h3>Zaudējumi</h3>
+                <p>{{ stats.losses }}</p>
+            </div>
+        </div>
+        
+        <!-- Filter Form -->
+        <form method="GET" class="filter-form">
+            <input type="text" name="turnirs" placeholder="Filtrēt pēc turnīra" 
+                   value="{{ current_filter }}">
+            <button type="submit"><i class="fas fa-filter"></i> Filtrēt</button>
+            <a href="/" class="btn secondary"><i class="fas fa-times"></i> Notīrīt</a>
+        </form>
+        
+        <!-- Matches Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datums</th>
+                        <th>Turnīrs</th>
+                        <th>Vieta</th>
+                        <th>Pretinieks</th>
+                        <th>Rezultāts</th>
+                        <th>Vārtu guvēji</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in matches %}
+                    <tr>
+                        <td>{{ match.datums }}</td>
+                        <td>{{ match.turnirs }}</td>
+                        <td>{{ match.vieta }}</td>
+                        <td>{{ match.pretinieks }}</td>
+                        <td>{{ match.rezultats }}</td>
+                        <td>{{ match.vartu_guveji if match.vartu_guveji else '-' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="no-data">Nav atrastas spēles</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="/graphs" class="btn primary">
+                <i class="fas fa-chart-pie"></i> Spēļu vietu sadalījums
+            </a>
+            <a href="/download" class="btn">
+                <i class="fas fa-download"></i> Lejupielādēt datus
+            </a>
+        </div>
+    </div>
+</body>
+</html>
